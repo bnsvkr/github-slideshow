@@ -41,10 +41,16 @@ Update these fields in `config.json`:
 {
   "fyers": {
     "client_id": "YOUR_FYERS_CLIENT_ID",
-    "access_token": "YOUR_FYERS_ACCESS_TOKEN"
+    "access_token": "YOUR_FYERS_ACCESS_TOKEN",
+    "redirect_uri": "https://your-redirect-uri.com"
+  },
+  "trading": {
+    "symbols": ["NSE:NIFTY50-INDEX", "NSE:BANKNIFTY-INDEX"]
   }
 }
 ```
+
+**Note**: Only `client_id` and `access_token` are required. Other settings can use defaults from `config.example.json`.
 
 ### Step 4: Test the System
 
@@ -58,13 +64,17 @@ python example_usage.py
 
 ### Step 5: Start Trading
 
+**For a single run** (set `"enabled": false` in schedule config):
 ```bash
-# For a single run (no schedule)
-python main.py
-
-# For continuous trading (with schedule enabled in config)
 python main.py
 ```
+This will analyze trends, generate signals, and exit.
+
+**For continuous trading** (set `"enabled": true` in schedule config):
+```bash
+python main.py
+```
+This will run continuously during configured market hours, checking at regular intervals.
 
 ## Understanding the Output
 
@@ -90,13 +100,13 @@ The system generates three types of signals:
 ### Log Output Example
 
 ```
-2024-01-15 09:25:00 - Running strategy at 2024-01-15 09:25:00
-2024-01-15 09:25:05 - Signal: BUY_CE for NSE:NIFTY50-INDEX
-2024-01-15 09:25:05 -   Trend: STRONG_BULLISH (strength: 75.00)
-2024-01-15 09:25:05 -   Optimal Strike: 21600
-2024-01-15 09:25:05 -   Greeks: {'delta': 0.52, 'gamma': 0.0008, 'theta': -15.5}
-2024-01-15 09:25:06 - Position: BUY_CE - NSE:NIFTY50-INDEX
-2024-01-15 09:25:06 -   Strike: 21600, Entry: 150.00
+YYYY-MM-DD 09:25:00 - Running strategy at YYYY-MM-DD 09:25:00
+YYYY-MM-DD 09:25:05 - Signal: BUY_CE for NSE:NIFTY50-INDEX
+YYYY-MM-DD 09:25:05 -   Trend: STRONG_BULLISH (strength: 75.00)
+YYYY-MM-DD 09:25:05 -   Optimal Strike: 21600
+YYYY-MM-DD 09:25:05 -   Greeks: {'delta': 0.52, 'gamma': 0.0008, 'theta': -15.5}
+YYYY-MM-DD 09:25:06 - Position: BUY_CE - NSE:NIFTY50-INDEX
+YYYY-MM-DD 09:25:06 -   Strike: 21600, Entry: 150.00
 ```
 
 ## What Happens Behind the Scenes
