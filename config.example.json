@@ -1,0 +1,44 @@
+{
+  "fyers": {
+    "client_id": "YOUR_FYERS_CLIENT_ID",
+    "access_token": "YOUR_FYERS_ACCESS_TOKEN",
+    "redirect_uri": "https://your-redirect-uri.com"
+  },
+  "trading": {
+    "symbols": [
+      "NSE:NIFTY50-INDEX",
+      "NSE:BANKNIFTY-INDEX",
+      "NSE:SBIN-EQ",
+      "NSE:RELIANCE-EQ",
+      "NSE:TCS-EQ"
+    ],
+    "risk_free_rate": 0.065,
+    "volatility_default": 0.2,
+    "risk_tolerance": "moderate",
+    "initial_stop_loss_pct": 2.0,
+    "initial_target_pct": 5.0,
+    "trailing_stop_pct": 1.5,
+    "target_trail_increment_pct": 2.0,
+    "max_positions": 5,
+    "position_size": 1,
+    "time_to_expiry_days": 7
+  },
+  "schedule": {
+    "enabled": true,
+    "start_time": "09:20",
+    "end_time": "15:20",
+    "check_interval_minutes": 5,
+    "trading_days": [
+      "MON",
+      "TUE",
+      "WED",
+      "THU",
+      "FRI"
+    ]
+  },
+  "logging": {
+    "level": "INFO",
+    "log_file": "trading.log",
+    "console_output": true
+  }
+}
