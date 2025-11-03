@@ -154,16 +154,24 @@ def test_config_management():
     print("Testing Configuration Management...")
     
     from algo_trading.utils.config import ConfigManager
+    import tempfile
+    import os
     
-    # Create example config
+    # Create example config in platform-independent temp directory
     cm = ConfigManager()
-    cm.create_example_config("/tmp/test_config.example.json")
+    temp_dir = tempfile.gettempdir()
+    test_config_path = os.path.join(temp_dir, "test_config.example.json")
+    
+    cm.create_example_config(test_config_path)
     print(f"  ✓ Example config created")
     
     # Verify file exists
-    import os
-    assert os.path.exists("/tmp/test_config.example.json"), "Config file not created"
+    assert os.path.exists(test_config_path), "Config file not created"
     print(f"  ✓ Config file verified")
+    
+    # Clean up
+    if os.path.exists(test_config_path):
+        os.remove(test_config_path)
     
     print("✅ Configuration Management: PASSED\n")
     return True
